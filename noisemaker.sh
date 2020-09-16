@@ -72,6 +72,7 @@ echo "Popping zenity!"
 echo ""
 echo "Waiting for zenity to be dealt with (press OK or be closed), then we continue."
 echo ""
+# sleep 0s && nohup zenity --warning --text "Don't forget to go take a shower, silly. When done, press OK." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
 notify-send "Go to bed now, so your sleep routine will be good."
 sleep 0s && nohup zenity --warning --text "Go to bed now, so your sleep routine will be good." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
 echo ""
