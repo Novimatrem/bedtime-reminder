@@ -22,7 +22,7 @@ TIMEHOURTIMEKEEPING="$( date +'%H')"
 
 # Debug, comment out in final, comment out above if using for testing.
 #TIMEHOURTIMEKEEPING="$(echo 01)"
-#TIMEMINUTETIMEKEEPING="$(echo 50)"
+#TIMEMINUTETIMEKEEPING="$(echo 15)"
 
 
 

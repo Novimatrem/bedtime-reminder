@@ -5,7 +5,7 @@ Novimatrem's bedtime reminder script, for the going to bed at the right times. -
 
 REQUIRES and DEPENDS UPON ``zenity``, ``espeak``, ``paplay``, and ``bash``.
 
-# The reminder currently triggers at 1:50am by default and there is no simple way to adjust this outside of editing the bash scripts manually in multiple places, at the moment. Sorry!
+# The reminder currently triggers at 1:15am by default and there is no simple way to adjust this outside of editing the bash scripts manually in multiple places, at the moment. Sorry!
 
 # Installation
 Clone the contents of this repo into a folder where it will be safely accessible in the future; ``git clone https://gitlab.com/Novimatrem/bedtime-reminder``

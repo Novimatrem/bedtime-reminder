@@ -25,7 +25,7 @@ echo "DEBUG: in noisemaker"
 
 # debug, we probably don't need this here at this point
 #TIMEHOURTIMEKEEPING="$(echo 01)"
-#TIMEMINUTETIMEKEEPING="$(echo 50)"
+#TIMEMINUTETIMEKEEPING="$(echo 15)"
 
 
 # Try to account for delays, to start making noise at exactly time
