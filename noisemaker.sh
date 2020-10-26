@@ -24,8 +24,8 @@ echo "DEBUG: in noisemaker"
 #TIMEMINUTETIMEKEEPING="$( date +'%M')"
 
 # debug, we probably don't need this here at this point
-#TIMEHOURTIMEKEEPING="$(echo 01)"
-#TIMEMINUTETIMEKEEPING="$(echo 15)"
+#TIMEHOURTIMEKEEPING="$(echo 22)"
+#TIMEMINUTETIMEKEEPING="$(echo 00)"
 
 
 # Try to account for delays, to start making noise at exactly time
@@ -74,8 +74,8 @@ echo "Waiting for zenity to be dealt with (press OK or be closed), then we conti
 echo ""
 # zenity --warning --text "Don't forget to go take a shower, silly. When done, press OK."
 # paplay --volume=67036 $(pwd)/audio.wav &
-notify-send "Go to bed now, so your sleep routine will be good."
-sleep 0s && nohup zenity --warning --text "Go to bed now, so your sleep routine will be good." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
+notify-send "Get ready for, and go to bed, asap, so your sleep routine will be good."
+sleep 0s && nohup zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
 echo ""
 rm -rf $HOME/nohup.out
 rm -rf $(pwd)/nohup.out

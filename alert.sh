@@ -21,22 +21,22 @@
 TIMEHOURTIMEKEEPING="$( date +'%H')"
 
 # Debug, comment out in final, comment out above if using for testing.
-#TIMEHOURTIMEKEEPING="$(echo 01)"
-#TIMEMINUTETIMEKEEPING="$(echo 15)"
+#TIMEHOURTIMEKEEPING="$(echo 22)"
+#TIMEMINUTETIMEKEEPING="$(echo 00)"
 
 
 
-# If not time hour at 01 (1 am), exit.
-if ! [ "$TIMEHOURTIMEKEEPING" == "01" ]; then exit; fi
+# If not time hour at 22 (10 pm), exit.
+if ! [ "$TIMEHOURTIMEKEEPING" == "22" ]; then exit; fi
 
-# If time hour is at 01 (1 am), continue.
-if [ "$TIMEHOURTIMEKEEPING" == "01" ]; then echo "Running noisemaker!"; fi
+# If time hour is at 22 (10 pm), continue.
+if [ "$TIMEHOURTIMEKEEPING" == "22" ]; then echo "Running noisemaker!"; fi
 
 # Play sound and show zenity box
-if [ "$TIMEHOURTIMEKEEPING" == "01" ]; then bash noisemaker.sh; fi
+if [ "$TIMEHOURTIMEKEEPING" == "22" ]; then bash noisemaker.sh; fi
 
-# If not time hour 01 (1 am), sleep repeatedly until it changes.
-if ! [ "$TIMEHOURTIMEKEEPING" == "01" ]; then while ! $TIMEHOURTIMEKEEPING == "*"; do sleep 1; done; fi
+# If not time hour 22 (10 pm), sleep repeatedly until it changes.
+if ! [ "$TIMEHOURTIMEKEEPING" == "22" ]; then while ! $TIMEHOURTIMEKEEPING == "*"; do sleep 1; done; fi
 
 # The user dealt with Zenity, we kill music BUT NOT THE WHOLE SCRIPT, then resume as normal checking for time.
 echo ""

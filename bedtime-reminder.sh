@@ -49,25 +49,25 @@ TIMEHOURTIMEKEEPING="$( date +'%H')"
 TIMEMINUTETIMEKEEPING="$( date +'%M')"
 
 # Debug, comment out in final, comment out above if using for testing.
-#TIMEHOURTIMEKEEPING="$(echo 01)"
-#TIMEMINUTETIMEKEEPING="$(echo 15)"
+#TIMEHOURTIMEKEEPING="$(echo 22)"
+#TIMEMINUTETIMEKEEPING="$(echo 00)"
 
 # Echo the gathered result.
 echo $TIMEHOURTIMEKEEPING
 echo ":"
 echo $TIMEMINUTETIMEKEEPING
 
-echo "(waiting for 01:15)"
+echo "(waiting for 22:00)"
 echo ""
 
 # Compare the TIMEHOURTIMEKEEPING with the hour that we wish to perform an action at.
 
-# If at time hour 01, cont.
-if [ $TIMEHOURTIMEKEEPING -eq 01 ]
+# If at time hour 22, cont.
+if [ $TIMEHOURTIMEKEEPING -eq 22 ]
 then
-if [ $TIMEMINUTETIMEKEEPING -eq 15 ]
+if [ $TIMEMINUTETIMEKEEPING -eq 00 ]
 then
-    echo "Time is 1:15am, do attempt!"
+    echo "Time is 22:00am, do attempt!"
     echo ""
     sleep 0s
     bash alert.sh
