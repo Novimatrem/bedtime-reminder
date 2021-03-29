@@ -60,7 +60,7 @@ echo ""
 echo Playing audio!
 echo ""
 echo "pwd is $(pwd), User- make sure audio is there."
-paplay --volume=67036 $(pwd)/audio.wav &
+paplay --volume=67036 $(pwd)/fuck.wav &
 espeak -p 66 -s 200 ". ... ."
 
 echo ""
