@@ -108,4 +108,7 @@ echo ""
 killall espeak
 killall speech-dispatcher
 
+#sleep 300s
+#init 0
+
 exit
