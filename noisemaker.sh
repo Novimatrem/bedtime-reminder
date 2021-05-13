@@ -20,8 +20,8 @@
 echo "DEBUG: in noisemaker"
 
 # actual, we probably don't need this here at this point
-#TIMEHOURTIMEKEEPING="$( date +'%H')"
-#TIMEMINUTETIMEKEEPING="$( date +'%M')"
+TIMEHOURTIMEKEEPING="$( date +'%H')"
+TIMEMINUTETIMEKEEPING="$( date +'%M')"
 
 # debug, we probably don't need this here at this point
 #TIMEHOURTIMEKEEPING="$(echo 22)"
@@ -109,9 +109,14 @@ killall espeak
 killall speech-dispatcher
 
 #optional nighttime shutdown, uncomment to use
-#sleep 300s
-#dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true
-#sleep 15s
-#init 0
+#only optionally shutdown if it's still night time, NOT when i close the box in the morning after waking.. smh
+#if [ $TIMEHOURTIMEKEEPING -eq 22 ]
+#then
+    #sleep 300s
+    #dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true
+    #sleep 15s
+    #init 0
+#fi
+
 
 exit
