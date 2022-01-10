@@ -75,7 +75,11 @@ echo ""
 # zenity --warning --text "Don't forget to go take a shower, silly. When done, press OK."
 # paplay --volume=67036 $(pwd)/audio.wav &
 notify-send "Get ready for, and go to bed, asap, so your sleep routine will be good."
-sleep 0s && nohup zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
+sleep 0s && nohup zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 5 times to close." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
+zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 4 more times to close..."
+zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 3 more times to close..."
+zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 2 more times to close..."
+zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 1 more time to close..."
 echo ""
 rm -rf $HOME/nohup.out
 rm -rf $(pwd)/nohup.out
