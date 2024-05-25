@@ -18,6 +18,7 @@ Make a startup program using the "Startup Applications" GUI in which the command
 
 # elementary OS workaround
 For sound to play while the system is locked, in elementary OS, you need to run the following command and then reboot the system.
+
 ``sudo adduser $(whoami) audio``
 
 # License (code)
