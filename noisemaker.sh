@@ -52,6 +52,10 @@ paplay $(pwd)/silence.wav # Play a sound so my desktop speakers won't miss the f
 espeak -p 66 -s 200 ". ... ."
 sleep 2s
 
+# just to be sure, set sys vol to 40% on noise
+amixer -D pulse sset Master 40%
+pactl set-sink-volume @DEFAULT_SINK@ 40%
+
 # Speaker warming 2
 cd "$(dirname "$0")"
 paplay $(pwd)/silence.wav # Play a sound so my desktop speakers won't miss the first 3 seconds of audio if left for a while.
