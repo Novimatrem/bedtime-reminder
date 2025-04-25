@@ -51,6 +51,7 @@ echo ""
 
 # BUG: FIXME: HACK: fix sound breaking randomly after this runs sometimes???
 killall pulseaudio
+killall pipewire
 
 # Sleep for an hour and 2 mins to avoid accidental re-trigger
 echo "Sleeping for 62 mins before checking for another alarm."
