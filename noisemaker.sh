@@ -40,6 +40,8 @@ sleep 4s
 # HACK: actually midnight is a better time.
 sleep 7200s # 2 hours in seconds
 
+pulseaudio --start
+
 # Unmute the speakers
 amixer set Master unmute
 amixer -q -D pulse sset Master unmute
