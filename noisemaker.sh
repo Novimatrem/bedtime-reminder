@@ -41,7 +41,7 @@ sleep 4s
 sleep 7200s # 2 hours in seconds
 
 pulseaudio --start
-
+pulseaudio
 # Unmute the speakers
 amixer set Master unmute
 amixer -q -D pulse sset Master unmute
