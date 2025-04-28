@@ -8,6 +8,9 @@ REQUIRES and DEPENDS UPON ``zenity``, ``espeak``, ``paplay``, and ``bash``.
 # The reminder currently triggers at midnight by default and there is no simple way to adjust this outside of editing the bash scripts manually in multiple places, at the moment. Sorry!
 
 # Installation
+This script relies on pulseaudio's ability to respawn itself upon death to be functional. First enter the following command into your Terminal, to enable that functionality.
+```sudo sed -i 's/^; autospawn = yes/autospawn = yes/' /etc/pulse/client.conf```
+
 Clone the contents of this repo into a folder where it will be safely accessible in the future; ``git clone https://gitlab.com/Novimatrem/bedtime-reminder``
 
 I usually place it in; ``/opt/`` making the final path ``/opt/bedtime-reminder/``. 
