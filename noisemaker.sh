@@ -39,6 +39,15 @@ sleep 4s
 
 # HACK: actually midnight is a better time.
 sleep 7200s # 2 hours in seconds
+pulseaudio -k
+killall pulseaudio
+pkill pulseaudio
+systemctl --user stop pulseaudio.service pulseaudio.socket
+systemctl --user stop pulseaudio
+systemctl --user restart pulseaudio
+systemctl --user restart pulseaudio.service
+systemctl --user restart pulseaudio.socket
+killall pulseaudio
 killall pipewire
 pipewire &
 pipewire-pulse &
