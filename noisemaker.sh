@@ -19,14 +19,9 @@
 
 echo "DEBUG: in noisemaker"
 
-# actual, we probably don't need this here at this point
+# actual
 TIMEHOURTIMEKEEPING="$( date +'%H')"
 TIMEMINUTETIMEKEEPING="$( date +'%M')"
-
-# debug, we probably don't need this here at this point
-#TIMEHOURTIMEKEEPING="$(echo 22)"
-#TIMEMINUTETIMEKEEPING="$(echo 00)"
-
 
 # Try to account for delays, to start making noise at exactly time
 sleep 45s
@@ -39,6 +34,16 @@ sleep 4s
 
 # HACK: actually midnight is a better time.
 sleep 7200s # 2 hours in seconds
+
+# CHECK IF THIS IS THE RIGHT TIME TO ACTUALLY CONTINUE WITH THE SCRIPT, IF NOT, EXIT.
+if [ $TIMEHOURTIMEKEEPING -gt 22 ]
+then
+echo "more than 22"
+if [ $TIMEHOURTIMEKEEPING -le 02 ]
+echo "less than 02"
+then
+    
+
 pulseaudio -k
 killall pulseaudio
 pkill pulseaudio
@@ -144,4 +149,7 @@ killall speech-dispatcher
 #fi
 
 
+exit
+fi
+fi
 exit
