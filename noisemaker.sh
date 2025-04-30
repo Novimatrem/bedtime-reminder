@@ -59,6 +59,13 @@ pipewire-pulse &
 pulseaudio --start
 pulseaudio
 
+# give everything enough time to start up or else the script fails and halts.
+echo ""
+echo "Giving everything 15 seconds to start up which is enough time or else the script fails and halts..."
+echo ""
+sleep 15s
+# /give everything enough time to start up or else the script fails and halts.
+
 # Unmute the speakers
 amixer set Master unmute
 amixer -q -D pulse sset Master unmute
