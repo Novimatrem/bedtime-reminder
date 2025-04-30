@@ -34,13 +34,10 @@ sleep 4s
 
 # HACK: actually midnight is a better time.
 sleep 7200s # 2 hours in seconds
-
+echo $TIMEHOURTIMEKEEPING
 # CHECK IF THIS IS THE RIGHT TIME TO ACTUALLY CONTINUE WITH THE SCRIPT, IF NOT, EXIT.
-if [ $TIMEHOURTIMEKEEPING -gt 22 ]
-then
-echo "more than 22"
-if [ $TIMEHOURTIMEKEEPING -le 02 ]
-echo "less than 02"
+if [ $TIMEHOURTIMEKEEPING == 00 ]
+echo "time is correct"
 then
     
 
