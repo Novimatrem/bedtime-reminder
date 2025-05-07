@@ -33,7 +33,7 @@ if ! [ "$TIMEHOURTIMEKEEPING" == "22" ]; then exit; fi
 if [ "$TIMEHOURTIMEKEEPING" == "22" ]; then echo "Running noisemaker!"; fi
 
 # Play sound and show zenity box
-if [ "$TIMEHOURTIMEKEEPING" == "22" ]; then bash noisemaker.sh; fi
+if [ "$TIMEHOURTIMEKEEPING" == "22" ]; then sleep 7200s && bash noisemaker.sh; fi
 
 # If not time hour 22 (10 pm), sleep repeatedly until it changes.
 if ! [ "$TIMEHOURTIMEKEEPING" == "22" ]; then while ! $TIMEHOURTIMEKEEPING == "*"; do sleep 1; done; fi
