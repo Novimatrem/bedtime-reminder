@@ -16,31 +16,34 @@
 # RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE
 # PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
 # REPAIR OR CORRECTION.
-
+echo ""
 echo "DEBUG: in noisemaker"
-
-# actual
+echo ""
+# Final check, for accuracy.
 TIMEHOURTIMEKEEPING="$( date +'%H')"
 TIMEMINUTETIMEKEEPING="$( date +'%M')"
 
-# Try to account for delays, to start making noise at exactly time
-sleep 45s
+# Debug, comment out in final, comment out above if using for testing.
+#TIMEHOURTIMEKEEPING="$(echo 06)"
+#TIMEMINUTETIMEKEEPING="$(echo 59)"
+
+
+# Try to account for delays, to start making noise at exactly 07:00:00 AM
+
+
+# HACK: actually, let's wake up at 8 instead.
+
+
+# it turns out, the latest sunrise in 2021 was at 8:25.
+# i never want to wake up in the dark, so let's ensure I wake at 8:30 instead.
+
 
 # Wake the system (find a command for this, seems rare/non-existent)
 echo "wake the system command goes here"
-
-sleep 8s
-sleep 4s
-
-# HACK: actually midnight is a better time.
-sleep 7200s # 2 hours in seconds
-echo $TIMEHOURTIMEKEEPING
-# CHECK IF THIS IS THE RIGHT TIME TO ACTUALLY CONTINUE WITH THE SCRIPT, IF NOT, EXIT.
-if [ $TIMEHOURTIMEKEEPING == 00 ]
-echo "time is correct"
-then
-    
-
+echo ""
+# Restart pulse before the alert plays,
+# to ensure we don't have a repeat of that day 
+# where I didn't wake up, and missed my morning estrogen.
 pulseaudio -k
 killall pulseaudio
 pkill pulseaudio
@@ -55,13 +58,19 @@ pipewire &
 pipewire-pulse &
 pulseaudio --start
 pulseaudio
+# Switch sound device
+#pacmd set-default-sink "alsa_output.pci-0000_01_00.1.hdmi-stereo"
 
 # give everything enough time to start up or else the script fails and halts.
 echo ""
 echo "Giving everything 15 seconds to start up which is enough time or else the script fails and halts..."
 echo ""
+pulseaudio -k
 sleep 15s
 # /give everything enough time to start up or else the script fails and halts.
+echo ""
+echo "Starting quick and dirty debugging..."
+echo ""
 
 # Unmute the speakers
 amixer set Master unmute
@@ -69,29 +78,102 @@ amixer -q -D pulse sset Master unmute
 pactl set-sink-mute 0 0
 pactl set-sink-mute 1 0
 
+
+
+echo ""
+
+echo ""
+set -x
+
+
 # Speaker warming
 cd "$(dirname "$0")"
-paplay $(pwd)/silence.wav # Play a sound so my desktop speakers won't miss the first 3 seconds of audio if left for a while.
-espeak -p 66 -s 200 ". ... ."
-sleep 2s
 
-# just to be sure, set sys vol to 40% on noise
-amixer -D pulse sset Master 40%
-pactl set-sink-volume @DEFAULT_SINK@ 40%
+
+
+
+
+
+echo ""
+
+echo ""
+
+#echo 2s
 
 # Speaker warming 2
 cd "$(dirname "$0")"
-paplay $(pwd)/silence.wav # Play a sound so my desktop speakers won't miss the first 3 seconds of audio if left for a while.
-espeak -p 66 -s 200 ". ... ."
-sleep 2s
 
-# Play audio with paplay
+
+
+#echo 2s
+
+# Set volume to reasonable percentage to wake me up, but not to deafen the neighborhood
 echo ""
-echo Playing audio!
+echo "Speaker volume to a %!"
 echo ""
-echo "pwd is $(pwd), User- make sure audio is there."
-paplay --volume=67036 $(pwd)/fuck.wav &
-espeak -p 66 -s 200 ". ... ."
+amixer -D pulse sset Master 45%
+pactl set-sink-volume @DEFAULT_SINK@ 45%
+
+function flashing {
+echo 0.1
+xrandr --output eDP-1 --brightness 1
+xrandr --output HDMI-0 --brightness 1
+xrandr --output DVI-D-0 --brightness 1
+echo 0.01
+xrandr --output eDP-1 --brightness 0.3
+xrandr --output HDMI-0 --brightness 0.3
+xrandr --output DVI-D-0 --brightness 0.3
+echo 0.1
+xrandr --output eDP-1 --brightness 1
+xrandr --output HDMI-0 --brightness 1
+xrandr --output DVI-D-0 --brightness 1
+echo 0.1
+xrandr --output eDP-1 --brightness 0.3
+xrandr --output HDMI-0 --brightness 0.3
+xrandr --output DVI-D-0 --brightness 0.3
+echo 0.1
+xrandr --output eDP-1 --brightness 1
+xrandr --output HDMI-0 --brightness 1
+xrandr --output DVI-D-0 --brightness 1
+echo 0.1
+}
+
+# Fluctuate brightness to alert me
+flashing
+cd "$(dirname "$0")"
+
+
+
+amixer -D pulse sset Master 45%
+echo ""
+echo Playing fly.wav!
+echo ""
+echo "pwd is $(pwd), User- make sure fly.wav is there."
+
+
+echo 0s && nohup paplay fly.wav && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out && rm -rf /opt/nohup.out && disown & disown
+
+
+# Fluctuate brightness to alert me
+flashing
+
+echo 0s
+
+
+# Fluctuate brightness to alert me
+flashing
+
+echo 0s
+
+
+# Fluctuate brightness to alert me
+flashing
+
+# Fluctuate brightness to alert me
+flashing
+
+# Fluctuate brightness to alert me
+flashing
 
 echo ""
 echo "Removing messy non-required nohup.out!"
@@ -102,58 +184,218 @@ echo "Popping zenity!"
 echo ""
 echo "Waiting for zenity to be dealt with (press OK or be closed), then we continue."
 echo ""
-# zenity --warning --text "Don't forget to go take a shower, silly. When done, press OK."
-# paplay --volume=67036 $(pwd)/audio.wav &
-notify-send "Get ready for, and go to bed, asap, so your sleep routine will be good."
-sleep 0s && nohup zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 5 times to close." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
-zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 4 more times to close..."
-zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 3 more times to close..."
-zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 2 more times to close..."
-zenity --warning --text "Get ready for, and go to bed, asap, so your sleep routine will be good. Press space 1 more time to close..."
+
+echo 0.2s
+( speaker-test -t sine -f 1000 )& pid=$! ; echo 1s ; kill -9 $pid
+echo 0.2s
+( speaker-test -t sine -f 1000 )& pid=$! ; echo 1s ; kill -9 $pid
+echo 0.2s
+( speaker-test -t sine -f 1000 )& pid=$! ; echo 1s ; kill -9 $pid
+echo 0.2s
+( speaker-test -t sine -f 1000 )& pid=$! ; echo 1s ; kill -9 $pid
+echo 0.2s
+( speaker-test -t sine -f 1000 )& pid=$! ; echo 1s ; kill -9 $pid
+echo 0.2s
+( speaker-test -t sine -f 1000 )& pid=$! ; echo 1s ; kill -9 $pid
+echo 0.2s
+( speaker-test -t sine -f 1000 )& pid=$! ; echo 1s ; kill -9 $pid
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+
+
+# m
+echo 0.2s
+
+
+
+
+
+echo 0.2s
+# /
+
+sleep 15s
+notify-send "Calendar event!"
+echo 0s && nohup zenity --warning --text "Calendar event! Hold escape for 30 moments to turn-off." && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out
+zenity --warning --text "Calendar event! Hold escape for 29 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 28 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 27 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 26 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 25 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 24 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 23 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 22 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 21 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 20 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 19 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 18 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 17 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 16 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 15 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 14 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 13 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 12 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 11 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 10 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 9 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 8 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 7 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 6 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 5 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 4 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 3 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 2 more moments to turn-off..."
+zenity --warning --text "Calendar event! Hold escape for 1 more moment to turn-off..."
 echo ""
 rm -rf $HOME/nohup.out
 rm -rf $(pwd)/nohup.out
-sleep 0s
+echo 0s
 echo "Removing messy non-required nohup.out!"
 echo ""
-echo "Killing paplay HARD to stop audio."
+
 echo ""
 pkill paplay
 killall paplay
 kill -9 $(pgrep paplay)
+pkill aplay
+killall aplay
+kill -9 $(pgrep aplay)
 
-sleep 1s
-paplay $(pwd)/silence.wav
-espeak -p 66 -s 200 ". ... ."
-sleep 2s
-espeak -p 66 -s 200 ". ... ."
-paplay $(pwd)/silence.wav
-sleep 2s
-sleep 1s
-sleep 2s
+# Amazing speech synthesis, this is.
+echo 1s
+
+
+
+echo 2s
+
+
+
+echo 2s
+
+echo 1s
+
+echo 2s
+
+# Open to-do list (uncomment and change path to where your to-do list in PDF form is)
+#echo 0s && nohup atril /home/$(whoami)/Dropbox/Private-Novimatrem/my-stuff/docs/Schedule_Weekly_24_Hours_EDITED_300ppi_v20.pdf && rm -rf $HOME/nohup.out && rm -rf $(pwd)/nohup.out && rm -rf /opt/nohup.out && disown & disown
+
+# Daily fortune
+#TODAYFORT="$(fortune -a)"
+
 
 echo ""
 rm -rf $HOME/nohup.out
 rm -rf $(pwd)/nohup.out
-sleep 0s
+echo 0s
 echo "Removing messy non-required nohup.out!"
 echo ""
 
 killall espeak
 killall speech-dispatcher
 
-#optional nighttime shutdown, uncomment to use
-#only optionally shutdown if it's still night time, NOT when i close the box in the morning after waking.. smh
-#if [ $TIMEHOURTIMEKEEPING -eq 22 ]
-#then
-    #sleep 300s
-    #dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true
-    #sleep 15s
-    #init 0
-#fi
-
-
-exit
-fi
-fi
 exit
