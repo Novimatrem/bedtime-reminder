@@ -3,7 +3,7 @@ Novimatrem's bedtime reminder script, for the going to bed at the right times. -
 
 [![Platform: GNU/Linux](https://img.shields.io/badge/platform-GNU/Linux-blue.svg)](www.kernel.org/linux.html) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-REQUIRES and DEPENDS UPON ``zenity``, ``espeak``, ``paplay``, and ``bash``.
+REQUIRES and DEPENDS UPON ``kdialog``, ``espeak``, ``paplay``, and ``bash``.
 
 # The reminder currently triggers at midnight by default and there is no simple way to adjust this outside of editing the bash scripts manually in multiple places, at the moment. Sorry!
 

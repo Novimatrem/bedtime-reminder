@@ -32,13 +32,13 @@ if ! [ "$TIMEHOURTIMEKEEPING" == "22" ]; then exit; fi
 # If time hour is at 22 (10 pm), continue.
 if [ "$TIMEHOURTIMEKEEPING" == "22" ]; then echo "Running noisemaker!"; fi
 
-# Play sound and show zenity box
+# Play sound and show kdialog box
 if [ "$TIMEHOURTIMEKEEPING" == "22" ]; then sleep 7200s && bash noisemaker.sh; fi
 
 # If not time hour 22 (10 pm), sleep repeatedly until it changes.
 if ! [ "$TIMEHOURTIMEKEEPING" == "22" ]; then while ! $TIMEHOURTIMEKEEPING == "*"; do sleep 1; done; fi
 
-# The user dealt with Zenity, we kill music BUT NOT THE WHOLE SCRIPT, then resume as normal checking for time.
+# The user dealt with kdialog, we kill music BUT NOT THE WHOLE SCRIPT, then resume as normal checking for time.
 echo ""
 
 echo "Killing paplay HARD to stop sounds."
