@@ -5,6 +5,8 @@ Novimatrem's bedtime reminder script, for the going to bed at the right times. -
 
 REQUIRES and DEPENDS UPON ``kdialog``, ``espeak``, ``paplay``, and ``bash``.
 
+Note: script functionality requires system to remain unmuted and unlocked
+
 # The reminder currently triggers at midnight by default and there is no simple way to adjust this outside of editing the bash scripts manually in multiple places, at the moment. Sorry!
 
 # Installation
