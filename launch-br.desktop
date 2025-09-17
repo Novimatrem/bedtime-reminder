@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=launch-br
+Comment=launch-br
+Exec=bash /opt/bedtime-reminder/bedtime-reminder.sh
+Terminal=false
+Type=Application
+Path=/opt/bedtime-reminder/
+StartupNotify=false
