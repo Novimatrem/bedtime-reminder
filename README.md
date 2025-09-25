@@ -3,7 +3,7 @@ Novimatrem's bedtime reminder script, for the going to bed at the right times. -
 
 [![Platform: GNU/Linux](https://img.shields.io/badge/platform-GNU/Linux-blue.svg)](www.kernel.org/linux.html) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-REQUIRES and DEPENDS UPON ``kdialog``, ``espeak``, ``paplay``, ``libnotify-bin``, and ``bash``.
+REQUIRES and DEPENDS UPON (**INSTALL ALL THESE**): ``pulseaudio``, ``kdialog``, ``espeak``, ``paplay``, ``libnotify-bin``, and ``bash``.
 
 Note: script functionality requires system to remain unmuted and unlocked
 
