@@ -219,7 +219,9 @@ sleep 18000s # 5 hours in minutes, so the alert goes off at mid-day.
 
 sleep 30s # account for lag so we go off at exactly 12:00:00 mid-day
 
-sleep 47700s # this is bedtime reminder, it plays at exactly 1:15 am. this wait ensures that.
+sleep 39600s # wait 11 hours in seconds
+
+sleep 900s # 15 minutes in seconds
 
 powershell -c "(New-Object Media.SoundPlayer fly.wav).PlaySync();" &
 
